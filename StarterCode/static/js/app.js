@@ -4,34 +4,7 @@ var tableData = data;
 var tbody = d3.select("tbody");
 console.log(data);
 
-data.forEach(function(eachdata){
-  console.log(eachdata);
-});
-data.forEach(function(eachdata) {
-    console.log(eachdata);
-    
-  });
 
-  data.forEach(function(eachdata) {
-      console.log(eachdata);
-      
-    
-      Object.entries(eachdata).forEach(function([key, value]) {
-        console.log(key, value);
-      });
-    });
-
-    data.forEach(function(eachdata) {
-        console.log(eachdata);
-       
-      
-        Object.entries(eachdata).forEach(function([key, value]) {
-          console.log(key, value);
-          
-          var cell = tbody.append("td");
-          cell.text(value);
-        });
-      });
       data.forEach(function(eachdata) {
           console.log(eachdata);
           var row = tbody.append("tr");
@@ -40,18 +13,36 @@ data.forEach(function(eachdata) {
            
             var cell = tbody.append("td");
             cell.text(value);
-          });
+          }); 
         });
+        
+
 
 // YOUR CODE HERE!
-// var datetimeInput = d3.select("#datetime");
-// var filterbtn = d3.select("#filter-btn");
-// filterbtn.addEventListener('click', handleFilterTableButtonClick);
+var submit = d3.select("#filter-btn");
+var empty = d3.select("tbody")
+submit.on("click", function() {
+    empty.html("")
+    d3.event.preventDefault();
+    var inputElement = d3.select("#datetime");
+    var inputValue = inputElement.property("value");
 
-// function handleFilterTableButtonClick(){
-//     var filterdate = $datetimeInput.value.trim().tolowerCase();
-//     tableData = data.filter(function(data){
-//     var  
-//     })
-// }
-//     var button = $datetimeInput
+    console.log(inputValue);
+    console.log(tableData);
+
+    var filteredData = tableData.filter(bydate => bydate.datetime === inputValue);
+
+    console.log(filteredData);
+
+    filteredData.forEach(function(filteredReport) {
+        console.log(filteredReport);
+        var row = tbody.append("tr");
+    
+    
+        Object.entries(filteredReport).forEach(function([key, value]){
+            console.log(key, value);
+            var cell = tbody.append("td");
+            cell.text(value);
+        });
+    });
+});
